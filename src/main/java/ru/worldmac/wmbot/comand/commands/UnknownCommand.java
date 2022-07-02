@@ -12,7 +12,7 @@ public class UnknownCommand implements Command {
 
     private final SendMessageService sendMessageService;
 
-    private final static String UNKNOWN_MESSAGE = "Я не понимаю вас \uD83D\uDE1F, напишите /help чтобы узнать что я понимаю.";
+    public final static String UNKNOWN_MESSAGE = "Я не понимаю вас \uD83D\uDE1F, напишите /help чтобы узнать что я понимаю.";
 
     public UnknownCommand(SendMessageService sendMessageService) {
         this.sendMessageService = sendMessageService;

@@ -12,7 +12,7 @@ public class StartCommand implements Command {
 
     private final SendMessageService sendMessageService;
 
-    private final static String START_MESSAGE = "Привет, я бот WorldMac. Я помогу тебе в поиске техники";
+    public final static String START_MESSAGE = "Привет, я бот WorldMac. Я помогу тебе в поиске техники";
 
     public StartCommand(SendMessageService sendMessageService) {
         this.sendMessageService = sendMessageService;

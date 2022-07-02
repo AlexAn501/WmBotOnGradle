@@ -12,7 +12,7 @@ public class ListCommand implements Command {
 
     private final SendMessageService sendMessageService;
 
-    private final static String LIST_MESSAGE = "Список всех продуктов.";
+    public final static String LIST_MESSAGE = "Список всех продуктов.";
 
     public ListCommand(SendMessageService sendMessageService) {
         this.sendMessageService = sendMessageService;
