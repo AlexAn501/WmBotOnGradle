@@ -21,6 +21,6 @@ public class ListCommand implements Command {
     @Override
     public void execute(Update update) {
         String chatId = update.getMessage().getChatId().toString();
-        sendMessageService.sandMessage(chatId, LIST_MESSAGE);
+        sendMessageService.sendMessage(chatId, LIST_MESSAGE);
     }
 }

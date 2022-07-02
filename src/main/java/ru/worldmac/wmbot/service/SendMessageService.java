@@ -11,5 +11,5 @@ public interface SendMessageService {
      * @param chatId provided chatId in which messages would be sent.
      * @param message provided message to be sent.
      */
-    void sandMessage(String chatId, String message);
+    void sendMessage(String chatId, String message);
 }

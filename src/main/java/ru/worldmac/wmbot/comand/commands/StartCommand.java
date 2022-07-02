@@ -21,6 +21,6 @@ public class StartCommand implements Command {
     @Override
     public void execute(Update update) {
         String chatId = update.getMessage().getChatId().toString();
-        sendMessageService.sandMessage(chatId, START_MESSAGE);
+        sendMessageService.sendMessage(chatId, START_MESSAGE);
     }
 }

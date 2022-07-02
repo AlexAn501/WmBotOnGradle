@@ -20,10 +20,11 @@ public class SendMessageServiceImpl implements SendMessageService {
     }
 
     @Override
-    public void sandMessage(String chatId, String message) {
+    public void sendMessage(String chatId, String message) {
         SendMessage sm = new SendMessage();
         sm.setChatId(chatId);
         sm.setText(message);
+        sm.enableHtml(true);
 
         try {
             wmBot.execute(sm);

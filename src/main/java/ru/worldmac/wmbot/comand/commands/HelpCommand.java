@@ -13,13 +13,13 @@ public class HelpCommand implements Command {
 
     private final SendMessageService sendMessageService;
 
-    private final static String HELP_MESSAGE = String.format(" Доступные команды \n\n"
-            + "     Начать работу с ботом "
+    private final static String HELP_MESSAGE = String.format("<b>✨ Доступные команды ✨</b>\n\n"
+            + "<b>Начать\\закончить работу с ботом</b>\n"
             + "%s - начать работу со мной \n"
             + "%s - приостановить работу со мной\n"
             + "%s - получить список всех продуктов\n"
             + "%s - получить помощь в работе со мной\n",
-        CommandName.START, CommandName.START, CommandName.LIST, CommandName.HELP);
+        CommandName.START, CommandName.STOP, CommandName.LIST, CommandName.HELP);
 
     public HelpCommand(SendMessageService sendMessageService) {
         this.sendMessageService = sendMessageService;
@@ -28,6 +28,6 @@ public class HelpCommand implements Command {
     @Override
     public void execute(Update update) {
         String chatId = update.getMessage().getChatId().toString();
-        sendMessageService.sandMessage(chatId, HELP_MESSAGE);
+        sendMessageService.sendMessage(chatId, HELP_MESSAGE);
     }
 }
