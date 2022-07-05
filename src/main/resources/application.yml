@@ -1,0 +1,10 @@
+bot:
+  username: world_mac_bot
+  token: 5518341246:AAFKeTlse8fVQ9sGxyd4-
+
+spring:
+  datasource:
+    url: jdbc:postgresql://wmbot_wm_bot_db_1:5432/postgres?currentSchema=wm_bot
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver

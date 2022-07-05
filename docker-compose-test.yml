@@ -1,15 +1,6 @@
 version: '3.1'
 
 services:
-  wmbot:
-    depends_on:
-      - wm_bot_db
-    build:
-      context: .
-    environment:
-      BOT_NAME: ${BOT_NAME}
-      BOT_TOKEN: ${BOT_TOKEN}
-    restart: always
   wm_bot_db:
     image: postgres
     restart: always
