@@ -5,6 +5,6 @@ bot:
 spring:
   datasource:
     url: jdbc:postgresql://wmbot_wm_bot_db_1:5432/postgres?currentSchema=wm_bot
-    username: postgres
-    password: postgres
+    username: post
+    password: postgr
     driverClassName: org.postgresql.Driver

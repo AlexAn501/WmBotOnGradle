@@ -19,5 +19,5 @@ services:
       - '5432'
     environment:
       POSTGRES_DATABASE: "wm-bot-db"
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      BOT_DB_USERNAME: ${BOT_DB_USERNAME}
+      BOT_DB_PASSWORD: ${BOT_DB_PASSWORD}
