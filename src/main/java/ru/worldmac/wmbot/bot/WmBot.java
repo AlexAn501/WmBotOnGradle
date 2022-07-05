@@ -1,6 +1,5 @@
 package ru.worldmac.wmbot.bot;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -14,7 +13,6 @@ import static ru.worldmac.wmbot.comand.enums.CommandName.NO;
  * Telegram bot for WorldMac.
  */
 @Component
-@Slf4j
 public class WmBot extends TelegramLongPollingBot {
 
     private final static String COMMAND_PREFIX = "/";
