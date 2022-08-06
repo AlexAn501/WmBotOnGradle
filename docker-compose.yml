@@ -14,10 +14,15 @@ services:
     image: postgres
     restart: always
     ports:
-      - '5432:5432'
+      - '5433:5433'
     expose:
-      - '5432'
+      - '5433'
     environment:
       POSTGRES_DATABASE: "wm-bot-db"
       BOT_DB_USERNAME: ${BOT_DB_USERNAME}
       BOT_DB_PASSWORD: ${BOT_DB_PASSWORD}
+    volumes:
+      - wm_bot_db:/var/lib/psql
+# Names our volume
+volumes:
+  wm_bot_db:
