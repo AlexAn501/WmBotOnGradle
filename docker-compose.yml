@@ -6,21 +6,18 @@ services:
       - wm_bot_db
     build:
       context: .
-    environment:
-      BOT_NAME: ${BOT_NAME}
-      BOT_TOKEN: ${BOT_TOKEN}
+    env_file:
+      - ./env/wm-bot.env
     restart: always
   wm_bot_db:
     image: postgres
     restart: always
     ports:
-      - '5433:5433'
+      - '5433:5432'
     expose:
-      - '5433'
-    environment:
-      POSTGRES_DATABASE: "wm-bot-db"
-      BOT_DB_USERNAME: ${BOT_DB_USERNAME}
-      BOT_DB_PASSWORD: ${BOT_DB_PASSWORD}
+      - '5432'
+    env_file:
+      - ./env/wm-bot-db.env
     volumes:
       - wm_bot_db:/var/lib/psql
 # Names our volume
