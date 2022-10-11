@@ -7,7 +7,7 @@ services:
     build:
       context: .
     env_file:
-      - ./env/wm-bot.env
+      - ../envForWmBot/env/wm-bot.env
     restart: always
   wm_bot_db:
     image: postgres
@@ -17,7 +17,7 @@ services:
     expose:
       - '5432'
     env_file:
-      - ./env/wm-bot-db.env
+      - ../envForWmBot/env/wm-bot-db.env
     volumes:
       - wm_bot_db:/var/lib/psql
 # Names our volume
