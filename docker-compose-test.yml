@@ -1,11 +1,11 @@
 version: '3.1'
 
 services:
-  wm_bot_db:
+  wm_bot_db_test:
     image: postgres
     restart: always
     ports:
-      - '5432:5432'
+      - '5434:5432'
     expose:
       - '5432'
     environment:

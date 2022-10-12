@@ -10,6 +10,7 @@ import ru.worldmac.wmbot.bot.WmBot;
 import ru.worldmac.wmbot.comand.Command;
 import ru.worldmac.wmbot.service.SendMessageService;
 import ru.worldmac.wmbot.service.SendMessageServiceImpl;
+import ru.worldmac.wmbot.service.TelegramUserService;
 
 /**
  * Abstract class for testing {@link Command}s.
@@ -18,6 +19,7 @@ public abstract class AbstractCommandTest {
 
     protected WmBot wmBot = Mockito.mock(WmBot.class);
     protected SendMessageService sendMessageService = new SendMessageServiceImpl(wmBot);
+    protected TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
 
     abstract String getCommandName();
 

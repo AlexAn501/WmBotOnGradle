@@ -10,6 +10,7 @@ public enum CommandName {
     STOP("/stop"),
     LIST("/list"),
     HELP("/help"),
+    STAT("/stat"),
     NO("nocommand");
 
     CommandName(String commandName) {

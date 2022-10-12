@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://0.0.0.0:5434/postgres?currentSchema=wm_bot
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver

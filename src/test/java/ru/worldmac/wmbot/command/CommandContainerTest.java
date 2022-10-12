@@ -10,6 +10,7 @@ import ru.worldmac.wmbot.comand.CommandContainer;
 import ru.worldmac.wmbot.comand.commands.UnknownCommand;
 import ru.worldmac.wmbot.comand.enums.CommandName;
 import ru.worldmac.wmbot.service.SendMessageService;
+import ru.worldmac.wmbot.service.TelegramUserService;
 
 import java.util.Arrays;
 
@@ -21,17 +22,18 @@ class CommandContainerTest {
     @BeforeEach
     public void init() {
         SendMessageService sendBotMessageService = Mockito.mock(SendMessageService.class);
-        commandContainer = new CommandContainer(sendBotMessageService);
+        TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
+        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService);
     }
 
     @Test
     public void shouldGetAllTheExistingCommands() {
         //when-then
         Arrays.stream(CommandName.values())
-            .forEach(commandName -> {
-                Command command = commandContainer.retrieveCommand(commandName.getCommandName());
-                Assertions.assertNotEquals(UnknownCommand.class, command.getClass());
-            });
+                .forEach(commandName -> {
+                    Command command = commandContainer.retrieveCommand(commandName.getCommandName());
+                    Assertions.assertNotEquals(UnknownCommand.class, command.getClass());
+                });
     }
 
     @Test

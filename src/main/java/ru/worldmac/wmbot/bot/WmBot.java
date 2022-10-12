@@ -6,6 +6,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.worldmac.wmbot.comand.CommandContainer;
 import ru.worldmac.wmbot.service.SendMessageServiceImpl;
+import ru.worldmac.wmbot.service.TelegramUserService;
 
 import static ru.worldmac.wmbot.comand.enums.CommandName.NO;
 
@@ -25,8 +26,8 @@ public class WmBot extends TelegramLongPollingBot {
 
     private final CommandContainer commandContainer;
 
-    public WmBot() {
-        this.commandContainer = new CommandContainer(new SendMessageServiceImpl(this));
+    public WmBot(TelegramUserService telegramUserService) {
+        this.commandContainer = new CommandContainer(new SendMessageServiceImpl(this), telegramUserService);
     }
 
     @Override

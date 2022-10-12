@@ -6,17 +6,16 @@ import ru.worldmac.wmbot.service.SendMessageService;
 import ru.worldmac.wmbot.service.TelegramUserService;
 
 /**
- * Stop {@link Command}.
+ * Statistics {@link Command}.
  */
-
-public class StopCommand implements Command {
+public class StatCommand implements Command {
 
     private final SendMessageService sendMessageService;
     private final TelegramUserService telegramUserService;
 
-    public final static String STOP_MESSAGE = "Пока";
+    public final static String STAT_MESSAGE = "WMBot использует %s человек.";
 
-    public StopCommand(SendMessageService sendMessageService, TelegramUserService telegramUserService) {
+    public StatCommand(SendMessageService sendMessageService, TelegramUserService telegramUserService) {
         this.sendMessageService = sendMessageService;
         this.telegramUserService = telegramUserService;
     }
@@ -24,13 +23,9 @@ public class StopCommand implements Command {
     @Override
     public void execute(Update update) {
         String chatId = update.getMessage().getChatId().toString();
-        sendMessageService.sendMessage(chatId, STOP_MESSAGE);
+        int sizeActiveUser = telegramUserService.retrieveAllActiveUsers().size();
 
-        telegramUserService.findByChatId(chatId).ifPresent(
-                user -> {
-                    user.setActive(false);
-                    telegramUserService.save(user);
-                }
-        );
+        sendMessageService.sendMessage(chatId,
+                String.format(STAT_MESSAGE, sizeActiveUser));
     }
 }
