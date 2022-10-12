@@ -1,13 +1,11 @@
 package ru.worldmac.wmbot.repository;
 
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import ru.worldmac.wmbot.entity.TelegramUser;
+import ru.worldmac.wmbot.testConfig.TestContainersConfig;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,10 +14,7 @@ import java.util.Optional;
  * Integration-level testing for {@link TelegramUserRepository}.
  */
 
-@ActiveProfiles("test")
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class TelegramUserRepositoryTest {
+public class TelegramUserRepositoryTest extends TestContainersConfig {
 
     @Autowired
     private TelegramUserRepository telegramUserRepository;

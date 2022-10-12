@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://0.0.0.0:5434/postgres?currentSchema=wm_bot
-    username: postgres
-    password: postgres
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driverClassName: org.postgresql.Driver
