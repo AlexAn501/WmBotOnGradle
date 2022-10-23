@@ -1,6 +1,5 @@
 package ru.worldmac.wmbot.comand.commands;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.worldmac.wmbot.comand.Command;
 import ru.worldmac.wmbot.dto.enums.GroupTypeEnum;
@@ -16,20 +15,19 @@ import java.util.List;
 /**
  * Start {@link Command}.
  */
-
 public class StartCommand implements Command {
 
     private final SendMessageService sendMessageService;
     private final TelegramUserService telegramUserService;
-
-    @Autowired
-    private JavaRushClient javaRushClient;
+    private final JavaRushClient javaRushClient;
 
     public final static String START_MESSAGE = "Привет, я бот WorldMac. Я помогу тебе в поиске техники";
 
-    public StartCommand(SendMessageService sendMessageService, TelegramUserService telegramUserService) {
+    public StartCommand(SendMessageService sendMessageService, TelegramUserService telegramUserService,
+                        JavaRushClient javaRushClient) {
         this.sendMessageService = sendMessageService;
         this.telegramUserService = telegramUserService;
+        this.javaRushClient = javaRushClient;
     }
 
     @Override
@@ -53,7 +51,7 @@ public class StartCommand implements Command {
                 .type(GroupTypeEnum.TECH)
                 .build();
 
-        List<GroupDiscussionInfo> groupDiscussionByFilter = javaRushClient.getGroupDiscussionByFilter(args);
+        List<GroupDiscussionInfo> groupDiscussionByFilter = javaRushClient.getGroupDiscussionByFilter();
 
 
         sendMessageService.sendMessage(chatId, START_MESSAGE);

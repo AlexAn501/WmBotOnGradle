@@ -13,18 +13,16 @@ import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
 
 public class FeignClientConfigBuilder {
-    //    @Value("javarush.api.path")
     private final static String JR_URL = "https://javarush.ru/api/1.0/rest";
 
     public static <T> T feignBuildJson(Class<T> tClass) {
-        T rushClient = Feign.builder()
+        return Feign.builder()
                 .client(new OkHttpClient())
                 .encoder(initJacksonEncoder())
                 .decoder(initJacksonDecoder())
                 .logger(new Slf4jLogger(tClass))
                 .logLevel(Logger.Level.FULL)
                 .target(tClass, JR_URL);
-        return rushClient;
     }
 
     private static Encoder initJacksonEncoder() {

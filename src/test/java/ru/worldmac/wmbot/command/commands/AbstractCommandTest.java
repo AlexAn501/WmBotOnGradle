@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.worldmac.wmbot.bot.WmBot;
 import ru.worldmac.wmbot.comand.Command;
+import ru.worldmac.wmbot.feign.JavaRushClient;
 import ru.worldmac.wmbot.service.SendMessageService;
 import ru.worldmac.wmbot.service.SendMessageServiceImpl;
 import ru.worldmac.wmbot.service.TelegramUserService;
@@ -20,6 +21,7 @@ public abstract class AbstractCommandTest {
     protected WmBot wmBot = Mockito.mock(WmBot.class);
     protected SendMessageService sendMessageService = new SendMessageServiceImpl(wmBot);
     protected TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
+    protected JavaRushClient javaRushClient = Mockito.mock(JavaRushClient.class);
 
     abstract String getCommandName();
 

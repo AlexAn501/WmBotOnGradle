@@ -9,6 +9,7 @@ import ru.worldmac.wmbot.comand.Command;
 import ru.worldmac.wmbot.comand.CommandContainer;
 import ru.worldmac.wmbot.comand.commands.UnknownCommand;
 import ru.worldmac.wmbot.comand.enums.CommandName;
+import ru.worldmac.wmbot.feign.JavaRushClient;
 import ru.worldmac.wmbot.service.SendMessageService;
 import ru.worldmac.wmbot.service.TelegramUserService;
 
@@ -23,7 +24,8 @@ class CommandContainerTest {
     public void init() {
         SendMessageService sendBotMessageService = Mockito.mock(SendMessageService.class);
         TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
-        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService);
+        JavaRushClient javaRushClient = Mockito.mock(JavaRushClient.class);
+        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService, javaRushClient);
     }
 
     @Test

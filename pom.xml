@@ -19,7 +19,7 @@
         <slf4j.version>1.7.36</slf4j.version>
         <junit.varsion>4.13.1</junit.varsion>
         <postgresql.testcontainers.version>1.17.3</postgresql.testcontainers.version>
-<!--        <feign.starter.version>1.4.7.RELEASE</feign.starter.version>-->
+        <feign.starter.version>1.4.7.RELEASE</feign.starter.version>
         <jackson.version>2.13.4</jackson.version>
         <feign.version>11.10</feign.version>
     </properties>
@@ -53,7 +53,7 @@
             <artifactId>telegrambots-spring-boot-starter</artifactId>
             <version>${telegram.varsion}</version>
         </dependency>
-<!--        jackson         -->
+        <!--        jackson         -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
@@ -70,19 +70,9 @@
             <version>${jackson.version}</version>
         </dependency>
         <!--        feign-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-feign</artifactId>-->
-        <!--            <version>${feign.starter.version}</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-okhttp</artifactId>
-            <version>${feign.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-gson</artifactId>
             <version>${feign.version}</version>
         </dependency>
         <dependency>
@@ -95,8 +85,6 @@
             <artifactId>feign-jackson</artifactId>
             <version>${feign.version}</version>
         </dependency>
-
-
 
         <dependency>
             <groupId>org.slf4j</groupId>

@@ -56,21 +56,20 @@ public interface JavaRushClient {
     /**
      * Get all the {@link GroupDiscussionInfo} filtered by provided {@link GroupRequestArgs}.
      *
-     * @param args provided {@link GroupRequestArgs}
      * @return the collection of the {@link GroupDiscussionInfo} objects.
      */
 
-    @RequestLine("Get /groups/api/1.0/rest/groups")
+    @RequestLine("GET /groups/api/1.0/rest/groups")
     @Headers("Content-Type: application/json")
-    List<GroupDiscussionInfo> getGroupDiscussionByFilter(GroupRequestArgs args);
+    List<GroupDiscussionInfo> getGroupDiscussionByFilter();
 
 
-    /**
-     * Get all the {@link GroupInfo} filtered by provided {@link GroupRequestArgs}.
-     *
-     * @param requestArgs provided {@link GroupRequestArgs}.
-     * @return the collection of the {@link GroupInfo} objects.
-     */
+//    /**
+//     * Get all the {@link GroupInfo} filtered by provided {@link GroupRequestArgs}.
+//     *
+//     * @param requestArgs provided {@link GroupRequestArgs}.
+//     * @return the collection of the {@link GroupInfo} objects.
+//     */
 //    List<GroupInfo> getGroupList(GroupRequestArgs requestArgs);
 //
 //
