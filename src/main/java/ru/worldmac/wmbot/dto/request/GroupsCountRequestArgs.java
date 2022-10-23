@@ -7,6 +7,7 @@ import ru.worldmac.wmbot.dto.enums.GroupTypeEnum;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static java.util.Objects.nonNull;
 
@@ -21,8 +22,8 @@ public class GroupsCountRequestArgs {
     private final GroupTypeEnum type;
     private final GroupFilter filter;
 
-    public Map populateQueries() {
-        Map queries = new HashMap<>();
+    public Map<String, Object> populateQueries() {
+        Map<String, Object> queries = new HashMap<>();
         if (nonNull(query)) {
             queries.put("query", query);
         }

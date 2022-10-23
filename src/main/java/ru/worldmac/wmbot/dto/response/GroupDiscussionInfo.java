@@ -3,7 +3,6 @@ package ru.worldmac.wmbot.dto.response;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import ru.worldmac.wmbot.dto.GroupInfo;
 import ru.worldmac.wmbot.dto.UserDiscussionInfo;
 
 /**

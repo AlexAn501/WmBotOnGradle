@@ -30,8 +30,8 @@ public class GroupRequestArgs{
     private final GroupTypeEnum type;
     private final GroupFilter filter;
 
-    public Map populateQueries() {
-        Map queries = new HashMap();
+    public Map<String,Object> populateQueries() {
+        Map<String,Object> queries = new HashMap<>();
 
         if (nonNull(query)) {
             queries.put("query", query);

@@ -48,10 +48,12 @@ public class StartCommand implements Command {
         );
 
         GroupRequestArgs args = GroupRequestArgs.builder()
+//                .limit(1)
                 .type(GroupTypeEnum.TECH)
+//                .filter(GroupFilter.MY)
                 .build();
 
-        List<GroupDiscussionInfo> groupDiscussionByFilter = javaRushClient.getGroupDiscussionByFilter();
+        List<GroupDiscussionInfo> groupDiscussionByFilter = javaRushClient.getGroupDiscussionByFilter(args.populateQueries());
 
 
         sendMessageService.sendMessage(chatId, START_MESSAGE);

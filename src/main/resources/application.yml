@@ -9,6 +9,10 @@ spring:
     password: postgr
     driverClassName: org.postgresql.Driver
 
-javarush:
-  api:
-    path: https://javarush.ru/api/1.0/rest
+logging:
+  level:
+    ru.worldmac.wmbot: debug
+
+#javarush:
+#  api:
+#    path: https://javarush.ru/api/1.0/rest

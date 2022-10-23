@@ -12,6 +12,8 @@ import feign.jackson.JacksonEncoder;
 import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
 
+import java.text.SimpleDateFormat;
+
 public class FeignClientConfigBuilder {
     private final static String JR_URL = "https://javarush.ru/api/1.0/rest";
 
@@ -36,6 +38,7 @@ public class FeignClientConfigBuilder {
     private static ObjectMapper createObjectMapper() {
         return new ObjectMapper().registerModule(new JavaTimeModule())
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .setDateFormat(new SimpleDateFormat("dd-MM-yyyy"))
                 .findAndRegisterModules();
     }
 }

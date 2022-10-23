@@ -1,12 +1,15 @@
 package ru.worldmac.wmbot.feign;
 
 import feign.Headers;
+import feign.Param;
+import feign.QueryMap;
 import feign.RequestLine;
-import ru.worldmac.wmbot.dto.GroupInfo;
 import ru.worldmac.wmbot.dto.request.GroupRequestArgs;
 import ru.worldmac.wmbot.dto.response.GroupDiscussionInfo;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Client for Javarush Open API corresponds to Groups.
@@ -53,15 +56,32 @@ public interface JavaRushClient {
 //                  "403":{"description":"Forbidden"},
 //                  "404":{"description":"Not Found"}}}},
 
+//
+//    produces = { "application/json", "application/json;charset=UTF-8" }
+//    )
+//    default ResponseEntity<List<ru.worldmac.wmbot.model.GroupDiscussionInfo>> getGroupsListUsingGET(
+//            @ApiParam(value = "query") @Valid @RequestParam(value = "query", required = false) String query,
+//            @ApiParam(value = "type", allowableValues = "UNKNOWN, CITY, COMPANY, COLLEGE, TECH, SPECIAL, COUNTRY") @Valid @RequestParam(value = "type", required = false) String type,
+//            @ApiParam(value = "userId") @Valid @RequestParam(value = "userId", required = false) Integer userId,
+//            @ApiParam(value = "order", allowableValues = "UNKNOWN, NAME, MEMBERS, GROUP_ID") @Valid @RequestParam(value = "order", required = false) String order,
+//            @ApiParam(value = "filter", allowableValues = "UNKNOWN, ALL, MY") @Valid @RequestParam(value = "filter", required = false) String filter,
+//            @ApiParam(value = "includeDiscussion", defaultValue = "false") @Valid @RequestParam(value = "includeDiscussion", required = false, defaultValue="false") Boolean includeDiscussion,
+//            @ApiParam(value = "offset") @Valid @RequestParam(value = "offset", required = false) Integer offset,
+//            @ApiParam(value = "limit") @Valid @RequestParam(value = "limit", required = false) Integer limit) {
+//        return getDelegate().getGroupsListUsingGET(query, type, userId, order, filter, includeDiscussion, offset, limit);
+//    }
+
+
     /**
      * Get all the {@link GroupDiscussionInfo} filtered by provided {@link GroupRequestArgs}.
      *
+     * @param args  provided {@link GroupRequestArgs}
      * @return the collection of the {@link GroupDiscussionInfo} objects.
      */
 
-    @RequestLine("GET /groups/api/1.0/rest/groups")
+    @RequestLine("GET /groups")
     @Headers("Content-Type: application/json")
-    List<GroupDiscussionInfo> getGroupDiscussionByFilter();
+    List<GroupDiscussionInfo> getGroupDiscussionByFilter(@QueryMap Map<String, Object> args);
 
 
 //    /**
