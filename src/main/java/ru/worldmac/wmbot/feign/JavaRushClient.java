@@ -5,11 +5,12 @@ import feign.Param;
 import feign.QueryMap;
 import feign.RequestLine;
 import ru.worldmac.wmbot.dto.request.GroupRequestArgs;
+import ru.worldmac.wmbot.dto.request.GroupsCountRequestArgs;
 import ru.worldmac.wmbot.dto.response.GroupDiscussionInfo;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Client for Javarush Open API corresponds to Groups.
@@ -35,79 +36,49 @@ public interface JavaRushClient {
 //          "404":{"description":"Not Found"}}}},
 
 
-//    =================================
-
-//    "/api/1.0/rest/groups":
-//    {"get":{"tags":["group-controller"],
-//      "summary":"Get groups by filters","operationId":"getGroupsListUsingGET",
-//      "consumes":["application/json;charset=UTF-8","*/*"],
-//      "produces":["application/json","application/json;charset=UTF-8"],
-//      "parameters":[
-//          {"name":"query","in":"query","description":"query","required":false,"type":"string"},
-//          {"name":"type","in":"query","description":"type","required":false,"type":"string","enum":["UNKNOWN","CITY","COMPANY","COLLEGE","TECH","SPECIAL","COUNTRY"]},
-//          {"name":"userId","in":"query","description":"userId","required":false,"type":"integer","format":"int32"},
-//          {"name":"order","in":"query","description":"order","required":false,"type":"string","enum":["UNKNOWN","NAME","MEMBERS","GROUP_ID"]},
-//          {"name":"filter","in":"query","description":"filter","required":false,"type":"string","enum":["UNKNOWN","ALL","MY"]},
-//          {"name":"includeDiscussion","in":"query","description":"includeDiscussion","required":false,"type":"boolean","default":false},
-//          {"name":"offset","in":"query","description":"offset","required":false,"type":"integer","format":"int32"},
-//          {"name":"limit","in":"query","description":"limit","required":false,"type":"integer","format":"int32"}],
-//      "responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/GroupDiscussionInfo"}}},
-//                  "401":{"description":"Unauthorized"},
-//                  "403":{"description":"Forbidden"},
-//                  "404":{"description":"Not Found"}}}},
-
-//
-//    produces = { "application/json", "application/json;charset=UTF-8" }
-//    )
-//    default ResponseEntity<List<ru.worldmac.wmbot.model.GroupDiscussionInfo>> getGroupsListUsingGET(
-//            @ApiParam(value = "query") @Valid @RequestParam(value = "query", required = false) String query,
-//            @ApiParam(value = "type", allowableValues = "UNKNOWN, CITY, COMPANY, COLLEGE, TECH, SPECIAL, COUNTRY") @Valid @RequestParam(value = "type", required = false) String type,
-//            @ApiParam(value = "userId") @Valid @RequestParam(value = "userId", required = false) Integer userId,
-//            @ApiParam(value = "order", allowableValues = "UNKNOWN, NAME, MEMBERS, GROUP_ID") @Valid @RequestParam(value = "order", required = false) String order,
-//            @ApiParam(value = "filter", allowableValues = "UNKNOWN, ALL, MY") @Valid @RequestParam(value = "filter", required = false) String filter,
-//            @ApiParam(value = "includeDiscussion", defaultValue = "false") @Valid @RequestParam(value = "includeDiscussion", required = false, defaultValue="false") Boolean includeDiscussion,
-//            @ApiParam(value = "offset") @Valid @RequestParam(value = "offset", required = false) Integer offset,
-//            @ApiParam(value = "limit") @Valid @RequestParam(value = "limit", required = false) Integer limit) {
-//        return getDelegate().getGroupsListUsingGET(query, type, userId, order, filter, includeDiscussion, offset, limit);
-//    }
-
-
     /**
      * Get all the {@link GroupDiscussionInfo} filtered by provided {@link GroupRequestArgs}.
      *
      * @param args  provided {@link GroupRequestArgs}
      * @return the collection of the {@link GroupDiscussionInfo} objects.
+     *
+     *  OK (status code 200)
+     *  Unauthorized (status code 401)
+     *  Forbidden (status code 403)
+     *  Not Found (status code 404)
      */
 
     @RequestLine("GET /groups")
     @Headers("Content-Type: application/json")
     List<GroupDiscussionInfo> getGroupDiscussionByFilter(@QueryMap Map<String, Object> args);
 
+    /**
+     * Get count of groups filtered by provided {@link GroupRequestArgs}.
+     *
+     * @param countRequestArgs provided {@link GroupsCountRequestArgs}.
+     * @return the count of the groups.
+     *
+     *  OK (status code 200)
+     *  or Unauthorized (status code 401)
+     *  or Forbidden (status code 403)
+     *  or Not Found (status code 404)
+     */
+    @RequestLine("GET /groups/count")
+    @Headers("Content-Type: application/json")
+    Integer getGroupCount(@QueryMap Map<String,Object> countRequestArgs);
 
-//    /**
-//     * Get all the {@link GroupInfo} filtered by provided {@link GroupRequestArgs}.
-//     *
-//     * @param requestArgs provided {@link GroupRequestArgs}.
-//     * @return the collection of the {@link GroupInfo} objects.
-//     */
-//    List<GroupInfo> getGroupList(GroupRequestArgs requestArgs);
-//
-//
-//    /**
-//     * Get count of groups filtered by provided {@link GroupRequestArgs}.
-//     *
-//     * @param countRequestArgs provided {@link GroupsCountRequestArgs}.
-//     * @return the count of the groups.
-//     */
-//    Integer getGroupCount(GroupsCountRequestArgs countRequestArgs);
-//
-//    /**
-//     * Get {@link GroupDiscussionInfo} by provided ID.
-//     *
-//     * @param id provided ID.
-//     * @return {@link GroupDiscussionInfo} object.
-//     */
-//    GroupDiscussionInfo getGroupById(Integer id);
-
-
+    /**
+     * Get {@link GroupDiscussionInfo} by provided ID.
+     * @param id provided ID.
+     * @return {@link GroupDiscussionInfo} object.
+     *
+     *
+     * OK (status code 200)
+     * or Unauthorized (status code 401)
+     * or Forbidden (status code 403)
+     * or Not Found (status code 404)
+     */
+        @RequestLine("GET /groups/group{id}")
+        @Headers("Content-Type: application/json")
+    GroupDiscussionInfo getGroupById(@Param String id);
 }
