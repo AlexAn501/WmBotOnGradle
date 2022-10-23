@@ -19,6 +19,9 @@
         <slf4j.version>1.7.36</slf4j.version>
         <junit.varsion>4.13.1</junit.varsion>
         <postgresql.testcontainers.version>1.17.3</postgresql.testcontainers.version>
+<!--        <feign.starter.version>1.4.7.RELEASE</feign.starter.version>-->
+        <jackson.version>2.13.4</jackson.version>
+        <feign.version>11.10</feign.version>
     </properties>
     <dependencies>
         <dependency>
@@ -29,7 +32,6 @@
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -47,15 +49,54 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots-spring-boot-starter</artifactId>
             <version>${telegram.varsion}</version>
         </dependency>
+<!--        jackson         -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!--        feign-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-feign</artifactId>-->
+        <!--            <version>${feign.starter.version}</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+            <version>${feign.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-gson</artifactId>
+            <version>${feign.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-slf4j</artifactId>
+            <version>${feign.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>${feign.version}</version>
+        </dependency>
+
+
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -72,6 +113,11 @@
             <groupId>org.testcontainers</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql.testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

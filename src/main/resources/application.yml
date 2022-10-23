@@ -8,3 +8,7 @@ spring:
     username: post
     password: postgr
     driverClassName: org.postgresql.Driver
+
+javarush:
+  api:
+    path: https://javarush.ru/api/1.0/rest
