@@ -1,9 +1,9 @@
-package ru.worldmac.wmbot.dto;
+package ru.worldmac.wmbot.dto.enums;
 
 /**
  * Filters for group requests.
  */
-public enum GroupFilter {
+public enum GroupFilterEnum {
 
     UNKNOWN,
     MY,

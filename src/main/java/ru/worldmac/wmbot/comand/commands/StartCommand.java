@@ -3,8 +3,8 @@ package ru.worldmac.wmbot.comand.commands;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.worldmac.wmbot.comand.Command;
 import ru.worldmac.wmbot.dto.enums.GroupTypeEnum;
-import ru.worldmac.wmbot.dto.request.GroupRequestArgs;
-import ru.worldmac.wmbot.dto.request.GroupsCountRequestArgs;
+import ru.worldmac.wmbot.dto.request.GroupRequestFilter;
+import ru.worldmac.wmbot.dto.request.GroupsCountRequestFilter;
 import ru.worldmac.wmbot.dto.response.GroupDiscussionInfo;
 import ru.worldmac.wmbot.entity.TelegramUser;
 import ru.worldmac.wmbot.feign.JavaRushClient;
@@ -48,12 +48,12 @@ public class StartCommand implements Command {
                 }
         );
 
-        GroupRequestArgs args = GroupRequestArgs.builder()
+        GroupRequestFilter args = GroupRequestFilter.builder()
                 .type(GroupTypeEnum.TECH)
                 .build();
         List<GroupDiscussionInfo> groupDiscussionByFilter = javaRushClient.getGroupDiscussionByFilter(args.populateQueries());
 
-        GroupsCountRequestArgs countFilter = GroupsCountRequestArgs.builder()
+        GroupsCountRequestFilter countFilter = GroupsCountRequestFilter.builder()
                 .type(GroupTypeEnum.TECH)
                 .build();
         Integer groupCount = javaRushClient.getGroupCount(countFilter.populateQueries());

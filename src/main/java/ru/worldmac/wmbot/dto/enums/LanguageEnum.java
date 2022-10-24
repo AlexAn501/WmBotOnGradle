@@ -1,6 +1,6 @@
-package ru.worldmac.wmbot.dto;
+package ru.worldmac.wmbot.dto.enums;
 
-public enum Language {
+public enum LanguageEnum {
     UNKNOWN,
     ENGLISH,
     GERMAN,

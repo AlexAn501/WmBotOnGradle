@@ -9,7 +9,8 @@ public class FeignClientConfig {
 
     @Bean()
     public JavaRushClient javaRushClient() {
-        JavaRushClient javaRushClient = FeignClientConfigBuilder.feignBuildJson(JavaRushClient.class);
+        final String jrUrl = "https://javarush.ru/api/1.0/rest";
+        JavaRushClient javaRushClient = FeignClientConfigBuilder.feignBuildJson(JavaRushClient.class, jrUrl);
         return javaRushClient;
     }
 }

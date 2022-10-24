@@ -4,11 +4,13 @@ import feign.Headers;
 import feign.Param;
 import feign.QueryMap;
 import feign.RequestLine;
-import ru.worldmac.wmbot.dto.request.GroupRequestArgs;
-import ru.worldmac.wmbot.dto.request.GroupsCountRequestArgs;
+import ru.worldmac.wmbot.dto.request.GroupRequestFilter;
+import ru.worldmac.wmbot.dto.request.GroupsCountRequestFilter;
+import ru.worldmac.wmbot.dto.request.PostCountRequestFilter;
+import ru.worldmac.wmbot.dto.request.PostsRequestFilter;
 import ru.worldmac.wmbot.dto.response.GroupDiscussionInfo;
+import ru.worldmac.wmbot.dto.response.PostInfo;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -17,35 +19,17 @@ import java.util.Map;
  */
 public interface JavaRushClient {
 
-// :{"/api/1.0/rest/forum":{"get":{"tags":["forum-question-controller"],
-// "summary":"Get forum questions by filters","operationId":"getForumQuestionsUsingGET",
-// "consumes":["application/json;charset=UTF-8","*/*"],
-// "produces":["application/json","application/json;charset=UTF-8"],
-// "parameters":[{"name":"filter","in":"query","description":"filter","required":false,"type":"string",
-//          "enum":["UNKNOWN","ALL","MY","FRIENDS"]},
-//          {"name":"query","in":"query","description":"query","required":false,"type":"string"},
-//          {"name":"status","in":"query","description":"status","required":false,"type":"string",
-//                      "enum":["UNKNOWN","NEW","ACTIVE","SOLVED","ARCHIVE","DUPLICATE"]},
-//          {"name":"order","in":"query","description":"order","required":false,"type":"string",
-//                      "enum":["UNKNOWN","NEW","OLD","POPULAR","RELEVANCE"]},
-//          {"name":"offset","in":"query","description":"offset","required":false,"type":"integer","format":"int32"},
-//          {"name":"limit","in":"query","description":"limit","required":false,"type":"integer","format":"int32"}],
-//          "responses":{"200":{"description":"OK","schema":{"type":"array","items":{"$ref":"#/definitions/ForumQuestionInfo"}}},
-//          "401":{"description":"Unauthorized"},
-//          "403":{"description":"Forbidden"},
-//          "404":{"description":"Not Found"}}}},
-
-
     /**
-     * Get all the {@link GroupDiscussionInfo} filtered by provided {@link GroupRequestArgs}.
+     * Get all the {@link GroupDiscussionInfo} filtered by provided {@link GroupRequestFilter}.
      *
-     * @param args  provided {@link GroupRequestArgs}
+     * @param args provided {@link GroupRequestFilter}
      * @return the collection of the {@link GroupDiscussionInfo} objects.
-     *
-     *  OK (status code 200)
-     *  Unauthorized (status code 401)
-     *  Forbidden (status code 403)
-     *  Not Found (status code 404)
+     * <p>
+     * <p>
+     * OK (status code 200) <p>
+     * Unauthorized (status code 401) <p>
+     * Forbidden (status code 403) <p>
+     * Not Found (status code 404) <p>
      */
 
     @RequestLine("GET /groups")
@@ -53,32 +37,87 @@ public interface JavaRushClient {
     List<GroupDiscussionInfo> getGroupDiscussionByFilter(@QueryMap Map<String, Object> args);
 
     /**
-     * Get count of groups filtered by provided {@link GroupRequestArgs}.
+     * Get count of groups filtered by provided {@link GroupsCountRequestFilter}.
      *
-     * @param countRequestArgs provided {@link GroupsCountRequestArgs}.
+     * @param countRequestArgs provided {@link GroupsCountRequestFilter}.
      * @return the count of the groups.
-     *
-     *  OK (status code 200)
-     *  or Unauthorized (status code 401)
-     *  or Forbidden (status code 403)
-     *  or Not Found (status code 404)
+     * <p>
+     * <p>
+     * OK (status code 200) <p>
+     * or Unauthorized (status code 401) <p>
+     * or Forbidden (status code 403) <p>
+     * or Not Found (status code 404) <p>
      */
+
     @RequestLine("GET /groups/count")
     @Headers("Content-Type: application/json")
-    Integer getGroupCount(@QueryMap Map<String,Object> countRequestArgs);
+    Integer getGroupCount(@QueryMap Map<String, Object> countRequestArgs);
 
     /**
      * Get {@link GroupDiscussionInfo} by provided ID.
+     *
      * @param id provided ID.
      * @return {@link GroupDiscussionInfo} object.
-     *
-     *
-     * OK (status code 200)
-     * or Unauthorized (status code 401)
-     * or Forbidden (status code 403)
-     * or Not Found (status code 404)
+     * <p>
+     * <p>
+     * OK (status code 200)<p>
+     * or Unauthorized (status code 401)<p>
+     * or Forbidden (status code 403)<p>
+     * or Not Found (status code 404)<p>
      */
-        @RequestLine("GET /groups/group{id}")
-        @Headers("Content-Type: application/json")
+
+    @RequestLine("GET /groups/group{id}")
+    @Headers("Content-Type: application/json")
     GroupDiscussionInfo getGroupById(@Param String id);
+
+    /**
+     * Get all the {@link PostInfo} filtered by provided {@link PostsRequestFilter}.
+     *
+     * @param args provided {@link PostsRequestFilter}
+     * @return the collection of the {@link PostInfo} objects.
+     * <p>
+     * <p>
+     * OK (status code 200)<p>
+     * Unauthorized (status code 401)<p>
+     * Forbidden (status code 403)<p>
+     * Not Found (status code 404)<p>
+     */
+
+    @RequestLine("GET /posts")
+    @Headers("Content-Type: application/json")
+    List<PostInfo> getPostsByFilter(@QueryMap Map<String, Object> args);
+
+    /**
+     * Get count of post filtered by provided {@link PostCountRequestFilter}.
+     *
+     * @param args provided {@link PostCountRequestFilter}.
+     * @return the count of the post.
+     * <p>
+     * <p>
+     * OK (status code 200) <p>
+     * or Unauthorized (status code 401) <p>
+     * or Forbidden (status code 403) <p>
+     * or Not Found (status code 404) <p>
+     */
+
+    @RequestLine("GET /posts/count")
+    @Headers("Content-Type: application/json")
+    Integer getPostCount(@QueryMap Map<String, Object> args);
+
+    /**
+     * Get {@link PostInfo} by provided ID.
+     *
+     * @param id provided ID.
+     * @return {@link PostInfo} object.
+     * <p>
+     * <p>
+     * OK (status code 200)<p>
+     * or Unauthorized (status code 401)<p>
+     * or Forbidden (status code 403)<p>
+     * or Not Found (status code 404)<p>
+     */
+
+    @RequestLine("GET /posts/post{id}")
+    @Headers("Content-Type: application/json")
+    PostInfo getPostById(@Param String id);
 }
