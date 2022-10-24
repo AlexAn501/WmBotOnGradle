@@ -3,9 +3,13 @@ package ru.worldmac.wmbot.comand.commands;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.worldmac.wmbot.comand.Command;
 import ru.worldmac.wmbot.dto.enums.GroupTypeEnum;
+import ru.worldmac.wmbot.dto.enums.PostTypeEnum;
 import ru.worldmac.wmbot.dto.request.GroupRequestFilter;
 import ru.worldmac.wmbot.dto.request.GroupsCountRequestFilter;
+import ru.worldmac.wmbot.dto.request.PostCountRequestFilter;
+import ru.worldmac.wmbot.dto.request.PostsRequestFilter;
 import ru.worldmac.wmbot.dto.response.GroupDiscussionInfo;
+import ru.worldmac.wmbot.dto.response.PostInfo;
 import ru.worldmac.wmbot.entity.TelegramUser;
 import ru.worldmac.wmbot.feign.JavaRushClient;
 import ru.worldmac.wmbot.service.SendMessageService;
@@ -50,6 +54,7 @@ public class StartCommand implements Command {
 
         GroupRequestFilter args = GroupRequestFilter.builder()
                 .type(GroupTypeEnum.TECH)
+                .limit(2)
                 .build();
         List<GroupDiscussionInfo> groupDiscussionByFilter = javaRushClient.getGroupDiscussionByFilter(args.populateQueries());
 
@@ -59,6 +64,20 @@ public class StartCommand implements Command {
         Integer groupCount = javaRushClient.getGroupCount(countFilter.populateQueries());
 
         GroupDiscussionInfo groupById = javaRushClient.getGroupById("26");
+
+        PostsRequestFilter postFilter = PostsRequestFilter.builder()
+                .offset(3)
+                .limit(3)
+                .build();
+        List<PostInfo> postsByFilter = javaRushClient.getPostsByFilter(postFilter.populateQueries());
+
+        PostInfo postById = javaRushClient.getPostById("2");
+
+        PostCountRequestFilter postCountFilter = PostCountRequestFilter.builder()
+                .type(PostTypeEnum.INNER_LINK)
+                .build();
+        Integer postCount = javaRushClient.getPostCount(postCountFilter.populateQueries());
+
 
         sendMessageService.sendMessage(chatId, START_MESSAGE);
     }

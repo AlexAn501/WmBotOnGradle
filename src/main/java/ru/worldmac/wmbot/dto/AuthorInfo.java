@@ -2,6 +2,9 @@ package ru.worldmac.wmbot.dto;
 
 import lombok.Data;
 
+/**
+ * Author info DTO class.
+ */
 @Data
 public class AuthorInfo {
     private String city;

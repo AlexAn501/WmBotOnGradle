@@ -8,6 +8,8 @@ spring:
     username: post
     password: postgr
     driverClassName: org.postgresql.Driver
+  jpa:
+    show-sql: true
 
 logging:
   level:

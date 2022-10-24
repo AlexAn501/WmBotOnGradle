@@ -1,7 +1,7 @@
 package ru.worldmac.wmbot.dto.request;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import ru.worldmac.wmbot.dto.enums.GroupFilterEnum;
 import ru.worldmac.wmbot.dto.enums.GroupTypeEnum;
 import ru.worldmac.wmbot.dto.enums.PostTypeEnum;
@@ -15,18 +15,18 @@ import static java.util.Objects.nonNull;
  * Request arguments for Post request.
  */
 
-@Data
+@Getter
 @Builder
 public class PostsRequestFilter {
-    private String query;
-    private PostTypeEnum type;
-    private String groupKid;
-    private GroupTypeEnum groupType;
-    private Integer ownerId;
-    private String order;
-    private GroupFilterEnum filter;
-    private Integer offset;
-    private Integer limit;
+    private final String query;
+    private final PostTypeEnum type;
+    private final String groupKid;
+    private final GroupTypeEnum groupType;
+    private final Integer ownerId;
+    private final String order;
+    private final GroupFilterEnum filter;
+    private final Integer offset;
+    private final Integer limit;
 
     public Map<String, Object> populateQueries() {
         Map<String, Object> queries = new HashMap<>();
@@ -57,7 +57,6 @@ public class PostsRequestFilter {
         if (nonNull(limit)) {
             queries.put("limit", limit);
         }
-
         return queries;
     }
 }
