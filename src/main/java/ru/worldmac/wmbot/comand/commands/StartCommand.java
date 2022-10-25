@@ -11,7 +11,8 @@ import ru.worldmac.wmbot.dto.request.PostsRequestFilter;
 import ru.worldmac.wmbot.dto.response.GroupDiscussionInfo;
 import ru.worldmac.wmbot.dto.response.PostInfo;
 import ru.worldmac.wmbot.entity.TelegramUser;
-import ru.worldmac.wmbot.feign.JavaRushClient;
+import ru.worldmac.wmbot.feign.JRGroupClient;
+import ru.worldmac.wmbot.feign.JRPostsClient;
 import ru.worldmac.wmbot.service.SendMessageService;
 import ru.worldmac.wmbot.service.TelegramUserService;
 
@@ -24,15 +25,18 @@ public class StartCommand implements Command {
 
     private final SendMessageService sendMessageService;
     private final TelegramUserService telegramUserService;
-    private final JavaRushClient javaRushClient;
+    private final JRPostsClient jrPostsClient;
+    private final JRGroupClient jrGroupClient;
 
     public final static String START_MESSAGE = "Привет, я бот WorldMac. Я помогу тебе в поиске техники";
 
     public StartCommand(SendMessageService sendMessageService, TelegramUserService telegramUserService,
-                        JavaRushClient javaRushClient) {
+                        JRPostsClient jrPostsClient,
+                        JRGroupClient jrGroupClient) {
         this.sendMessageService = sendMessageService;
         this.telegramUserService = telegramUserService;
-        this.javaRushClient = javaRushClient;
+        this.jrPostsClient = jrPostsClient;
+        this.jrGroupClient = jrGroupClient;
     }
 
     @Override
@@ -56,27 +60,27 @@ public class StartCommand implements Command {
                 .type(GroupTypeEnum.TECH)
                 .limit(2)
                 .build();
-        List<GroupDiscussionInfo> groupDiscussionByFilter = javaRushClient.getGroupDiscussionByFilter(args.populateQueries());
+        List<GroupDiscussionInfo> groupDiscussionByFilter = jrGroupClient.getGroupDiscussionByFilter(args.populateQueries());
 
         GroupsCountRequestFilter countFilter = GroupsCountRequestFilter.builder()
                 .type(GroupTypeEnum.TECH)
                 .build();
-        Integer groupCount = javaRushClient.getGroupCount(countFilter.populateQueries());
+        Integer groupCount = jrGroupClient.getGroupCount(countFilter.populateQueries());
 
-        GroupDiscussionInfo groupById = javaRushClient.getGroupById("26");
+        GroupDiscussionInfo groupById = jrGroupClient.getGroupById("26");
 
         PostsRequestFilter postFilter = PostsRequestFilter.builder()
                 .offset(3)
                 .limit(3)
                 .build();
-        List<PostInfo> postsByFilter = javaRushClient.getPostsByFilter(postFilter.populateQueries());
+        List<PostInfo> postsByFilter = jrPostsClient.getPostsByFilter(postFilter.populateQueries());
 
-        PostInfo postById = javaRushClient.getPostById("2");
+        PostInfo postById = jrPostsClient.getPostById("2");
 
         PostCountRequestFilter postCountFilter = PostCountRequestFilter.builder()
                 .type(PostTypeEnum.INNER_LINK)
                 .build();
-        Integer postCount = javaRushClient.getPostCount(postCountFilter.populateQueries());
+        Integer postCount = jrPostsClient.getPostCount(postCountFilter.populateQueries());
 
 
         sendMessageService.sendMessage(chatId, START_MESSAGE);
