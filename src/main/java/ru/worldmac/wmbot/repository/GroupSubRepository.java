@@ -7,6 +7,6 @@ import ru.worldmac.wmbot.entity.GroupSub;
 /**
  * {@link Repository} for handling with {@link GroupSub} entity.
  */
-
+@Repository
 public interface GroupSubRepository extends JpaRepository<GroupSub, Integer> {
 }

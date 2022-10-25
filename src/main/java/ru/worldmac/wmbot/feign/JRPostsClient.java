@@ -4,11 +4,8 @@ import feign.Headers;
 import feign.Param;
 import feign.QueryMap;
 import feign.RequestLine;
-import ru.worldmac.wmbot.dto.request.GroupRequestFilter;
-import ru.worldmac.wmbot.dto.request.GroupsCountRequestFilter;
 import ru.worldmac.wmbot.dto.request.PostCountRequestFilter;
 import ru.worldmac.wmbot.dto.request.PostsRequestFilter;
-import ru.worldmac.wmbot.dto.response.GroupDiscussionInfo;
 import ru.worldmac.wmbot.dto.response.PostInfo;
 
 import java.util.List;
