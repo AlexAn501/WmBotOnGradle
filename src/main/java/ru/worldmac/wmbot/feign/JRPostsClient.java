@@ -9,6 +9,7 @@ import ru.worldmac.wmbot.dto.request.PostsRequestFilter;
 import ru.worldmac.wmbot.dto.response.PostInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Client for Javarush Open API corresponds to Posts.
@@ -30,7 +31,7 @@ public interface JRPostsClient {
 
     @RequestLine("GET ")
     @Headers("Content-Type: application/json")
-    List<PostInfo> getPostsByFilter(@QueryMap PostsRequestFilter args);
+    List<PostInfo> getPostsByFilter(@QueryMap Map<String, Object> args);
 
     /**
      * Get count of post filtered by provided {@link PostCountRequestFilter}.
@@ -47,7 +48,7 @@ public interface JRPostsClient {
 
     @RequestLine("GET /count")
     @Headers("Content-Type: application/json")
-    Integer getPostCount(@QueryMap PostCountRequestFilter args);
+    Integer getPostCount(@QueryMap Map<String, Object> args);
 
     /**
      * Get {@link PostInfo} by provided ID.

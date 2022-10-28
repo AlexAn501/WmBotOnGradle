@@ -23,7 +23,7 @@ public class TelegramUserRepositoryTest extends TestContainersConfig {
     @Sql(scripts = {"/sql/clearDbs.sql", "/sql/telegramUsers.sql"})
     @Test
     public void shouldProperlyFindAllActiveUsers() {
-        List<TelegramUser> users = telegramUserRepository.findAllByIsActiveTrue();
+        List<TelegramUser> users = telegramUserRepository.findAllByActiveTrue();
 
         Assertions.assertEquals(5, users.size());
     }

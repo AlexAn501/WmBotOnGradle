@@ -23,7 +23,7 @@ public class TelegramUser {
     private String chatId;
 
     @Column(name = "active")
-    private boolean isActive;
+    private boolean active;
 
     @Column(name = "user_name")
     private String userName;

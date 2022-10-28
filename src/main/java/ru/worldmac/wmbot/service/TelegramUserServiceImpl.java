@@ -23,7 +23,7 @@ public class TelegramUserServiceImpl implements TelegramUserService {
 
     @Override
     public List<TelegramUser> retrieveAllActiveUsers() {
-        return telegramUserRepository.findAllByIsActiveTrue();
+        return telegramUserRepository.findAllByActiveTrue();
     }
 
     @Override

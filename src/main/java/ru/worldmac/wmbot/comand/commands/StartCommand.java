@@ -15,7 +15,6 @@ import ru.worldmac.wmbot.feign.JRGroupClient;
 import ru.worldmac.wmbot.feign.JRPostsClient;
 import ru.worldmac.wmbot.service.SendMessageService;
 import ru.worldmac.wmbot.service.TelegramUserService;
-import ru.worldmac.wmbot.utils.Mapper;
 
 import java.util.List;
 
@@ -42,18 +41,17 @@ public class StartCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        var chatInfo = update.getMessage().getChat();
+        String chatId = update.getMessage().getChatId().toString();
 
-        telegramUserService.findByChatId(chatInfo.getId().toString()).ifPresentOrElse(
+        telegramUserService.findByChatId(chatId).ifPresentOrElse(
                 user -> {
                     user.setActive(true);
                     telegramUserService.save(user);
                 },
                 () -> {
-                    var telegramUser = new TelegramUser();
+                    TelegramUser telegramUser = new TelegramUser();
                     telegramUser.setActive(true);
-                    Mapper.fullingTelegramUser(telegramUser, chatInfo);
-
+                    telegramUser.setChatId(chatId);
                     telegramUserService.save(telegramUser);
                 }
         );
@@ -62,12 +60,12 @@ public class StartCommand implements Command {
                 .type(GroupTypeEnum.TECH)
                 .limit(2)
                 .build();
-        List<GroupDiscussionInfo> groupDiscussionByFilter = jrGroupClient.getGroupDiscussionByFilter(args);
+        List<GroupDiscussionInfo> groupDiscussionByFilter = jrGroupClient.getGroupDiscussionByFilter(args.populateQueries());
 
         GroupsCountRequestFilter countFilter = GroupsCountRequestFilter.builder()
                 .type(GroupTypeEnum.TECH)
                 .build();
-        Integer groupCount = jrGroupClient.getGroupCount(countFilter);
+        Integer groupCount = jrGroupClient.getGroupCount(countFilter.populateQueries());
 
         GroupDiscussionInfo groupById = jrGroupClient.getGroupById("26");
 
@@ -75,16 +73,16 @@ public class StartCommand implements Command {
                 .offset(3)
                 .limit(3)
                 .build();
-        List<PostInfo> postsByFilter = jrPostsClient.getPostsByFilter(postFilter);
+        List<PostInfo> postsByFilter = jrPostsClient.getPostsByFilter(postFilter.populateQueries());
 
         PostInfo postById = jrPostsClient.getPostById("2");
 
         PostCountRequestFilter postCountFilter = PostCountRequestFilter.builder()
                 .type(PostTypeEnum.INNER_LINK)
                 .build();
-        Integer postCount = jrPostsClient.getPostCount(postCountFilter);
+        Integer postCount = jrPostsClient.getPostCount(postCountFilter.populateQueries());
 
 
-        sendMessageService.sendMessage(chatInfo.getId().toString(), START_MESSAGE);
+        sendMessageService.sendMessage(chatId, START_MESSAGE);
     }
 }
