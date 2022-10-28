@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import ru.worldmac.wmbot.dto.enums.LanguageEnum;
 import ru.worldmac.wmbot.dto.LikesInfo;
+import ru.worldmac.wmbot.dto.enums.LanguageEnum;
 
 /**
  * Forum Question Info DTO class.
